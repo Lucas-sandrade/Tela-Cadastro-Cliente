@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="validacao.js"></script>
+    <script src="model.js"></script>
+    
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="title"> Cadastro de Clientes</h1>
+        <form>
+            <div class="form-register">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" onclick="validar()" >
+
+                <label for="middleName">Sobrenome: </label>
+                <input type="text" id="middleName" name="middleName" onclick="validar()"><br>
+
+                <label for="dateBirth">Data Nascimento:</label>
+                <input type="date" name="DateBirth" id="DateBirth">
+
+                <label for="city">Cidade:</label>
+                <input type="city" name="city" id="city" onclick="validar()"><br>
+
+                <label for="cep">CEP:</label>
+                <input type="text" name="cep" id="cep" onclick="validar()">
+
+                <label for="address">Endereço:</label>
+                <input type="text" name="address" id="address" onclick="validar()"><br>
+
+                <label for="number">N°:</label>
+                <input type="text" name="number" id="number" onclick="validar()">
+
+                <h3>Tipo do Cliente</h3>
+                <select name="Tipo de Cliente" id="typeClient">
+                    <option value="bronze">Bronze</option>
+                    <option value="silver">Prata</option>
+                    <option value="gold">Ouro</option>
+                    <option value="platinum">Platina</option>
+                    <option value="diamond">Diamante</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-confirm" >Confirmar</button>
+            
+        </form>
+
+        <ul class="listClient"></ul>
+
+    </div>
+    
+</body>
+</html>
