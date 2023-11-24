@@ -14,6 +14,13 @@ const formRegister = {
 
     // READ - BACKEND
     readClients() {
+        // Tente obter os dados do localStorage e atribuir a formRegister.client
+        const storedData = localStorage.getItem('lista');
+        if (storedData) {
+            formRegister.client = JSON.parse(storedData);
+        }
+
+        // Iterar sobre os clientes para exibição
         formRegister.client.forEach(({ name, DateBirth, city, address }) => {
             formRegister.insetClient({ name: name, DateBirth: DateBirth, city: city, address: address }, true);
         });
@@ -31,38 +38,55 @@ const formRegister = {
                 city: dados.city,
                 address: dados.address,
             });
+
+            // Atualize o localStorage sempre que um novo cliente for adicionado
+            localStorage.setItem('lista', JSON.stringify(formRegister.client));
         }
 
         const $list = document.querySelector('.listClient');
         $list.insertAdjacentHTML('afterbegin',
-            `<li date-id="${idInside}">
-                <button class="btn-delete">Excluir</button>
-                <span contenteditable>
+            `<li data-id="${idInside}">
+            <button class="btn-delete">Excluir</button>
+            <span contenteditable>
                 ${dados.name} ${dados.DateBirth} ${dados.city} ${dados.address}
-                </span>
-            </li>`
+            </span>
+        </li>`
         );
     },
 
     //DELETE - BACKEND
     deletePost(id) {
-        const listaDePostsAtualizada = formRegister.client.filter((postAtual) => {
-            return postAtual.id !== Number(id);
-        })
-        console.log(listaDePostsAtualizada);
-        formRegister.client = listaDePostsAtualizada;
+        const listaDeClientesAtualizada = formRegister.client.filter((clienteAtual) => {
+            return clienteAtual.id !== Number(id);
+        });
+
+        // Atualize o array de clientes no objeto formRegister
+        formRegister.client = listaDeClientesAtualizada;
+
+        // Atualize o localStorage após a remoção do cliente
+        localStorage.setItem('lista', JSON.stringify(formRegister.client));
+
+        console.log(formRegister.client);
     },
 
-    //UPDATE - BACKEND
+    // UPDATE - BACKEND
     updateClients(id, newContent) {
         const clientUpdate = formRegister.client.find((client) => {
             return client.id === Number(id);
         });
-        console.log(clientUpdate)
-        clientUpdate.content = newContent
+
+        // Atualize a propriedade correta no objeto cliente
+        clientUpdate.name = newContent;
+
+        // Atualize o localStorage após a atualização do cliente
+        localStorage.setItem('lista', JSON.stringify(formRegister.client));
+
+        console.log(clientUpdate);
     }
 
+
 };
+
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -72,6 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //CRUD: READ - FORNTEND
     formRegister.readClients();
+
+    localStorage.setItem('lista', JSON.stringify(formRegister.client))
 
     //CRUD: CREATE - FORNTEND
     $myForm.forEach(form => {
@@ -131,5 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
         formRegister.updateClients(id, elementCurrent.innerText)
     });
 });
+
+
 
 

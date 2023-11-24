@@ -1,6 +1,6 @@
 function validar() {
-        
-            // Validação do campo Nome
+
+    // Validação do campo Nome
     const nameInput = document.getElementById('name');
     const nameValue = nameInput.value;
     const nameRegex = /^[A-z ]{4,100}/;
@@ -8,7 +8,7 @@ function validar() {
     if (!nameRegex.test(nameValue)) {
         nameInput.classList.add('invalid-input');
 
-    return false;
+        return false;
     } else {
         nameInput.classList.remove('invalid-input');
     }
@@ -17,7 +17,7 @@ function validar() {
     // Validação do campo Sobrenome
     const middleNameInput = document.getElementById('middleName')
     const middleNameValue = middleNameInput.value;
-    const middleNameRegex =  /^[A-z ]{4,100}/;
+    const middleNameRegex = /^[A-z ]{4,100}/;
 
     if (!middleNameRegex.test(middleNameValue)) {
         middleNameInput.classList.add('invalid-input');
@@ -51,6 +51,25 @@ function validar() {
         cepInput.classList.remove('invalid-input');
     }
 
+    // Faz a consulta à API ViaCEP
+    const url = `https://viacep.com.br/ws/${cepValue}/json/`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.erro) {
+                alert('CEP não encontrado. Verifique o CEP informado.');
+            } else {
+                // Preenche os campos de endereço e cidade com os dados obtidos
+                document.getElementById('address').value = data.logradouro;
+                document.getElementById('city').value = data.localidade;
+            }
+        })
+        .catch(error => {
+            alert('Erro ao consultar o CEP. Tente novamente mais tarde.');
+            console.error(error);
+        });
+
     // Validação do campo Endereço
     const addressInput = document.getElementById('address');
     const addressValue = addressInput.value;
@@ -75,8 +94,8 @@ function validar() {
         numberInput.classList.remove('invalid-input');
     }
 
-        return true;
-    }
+    return true;
+
+}
 
 
-    

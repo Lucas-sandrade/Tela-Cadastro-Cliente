@@ -1,8 +1,8 @@
-.container{
+.container {
     height: 400px;
     width: 600px;
     border: 7px solid;
-    background-color:skyblue;
+    background-color: skyblue;
 }
 
 .title {
@@ -13,16 +13,14 @@
 
 }
 
-.form-register {
-    
-}
+.form-register {}
 
-.form-register input{
+.form-register input {
     display: inline-flex;
     margin: 15px;
 }
 
-.form-register label{
+.form-register label {
     position: relative;
     left: 10px;
     font-size: 19px;
@@ -64,17 +62,17 @@ ul {
     list-style: none;
 
     border: 2px solid;
-    
-   
+
+
 }
- 
-ul li{
+
+ul li {
     justify-content: center;
     font-family: 'Courier New', Courier, monospace;
     font-size: 20px;
 }
 
-ul li button{
+ul li button {
     margin-top: 10px;
     margin-bottom: 10px;
 
@@ -85,4 +83,4 @@ ul li button{
 
 .invalid-input {
     border: 2px solid red;
-  }
+}
